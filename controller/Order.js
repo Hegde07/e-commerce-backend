@@ -16,7 +16,7 @@ exports.createOrder = async (req,res)=>{
     const order = new Order(req.body)
     try{
       const doc = await order.save()
-      res.status(201).json(doc)
+      res.status(200).json(doc)
     }catch(err){
       res.status(400).json(err)
     }
