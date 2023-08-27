@@ -8,6 +8,7 @@ const brandsRouter = require('./routes/Brand')
 const usersRouter = require('./routes/User')
 const authRouter = require('./routes/Auth')
 const cartRouter = require('./routes/Cart')
+const orderRouter = require('./routes/Order')
 
 
 //middlewares
@@ -22,6 +23,7 @@ server.use('/brands',brandsRouter.router)
 server.use('/users',usersRouter.router)
 server.use('/auth',authRouter.router)
 server.use('/cart',cartRouter.router)
+server.use('/orders',orderRouter.router)
 main().catch(error=>console.log(error))
 
 async function main(){
