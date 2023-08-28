@@ -5,15 +5,18 @@ exports.createProduct = async (req, res) => {
   try {
     const doc = await product.save();
     res.status(201).json(doc);
-    console.log(res);
   } catch (err) {
     res.status(400).json(err);
   }
 };
 
 exports.fetchAllProducts = async (req, res) => {
-  let query = Product.find({deleted:{$ne:true}});
-  let totalProductsQuery=Product.find({deleted:{$ne:true}})
+  let condition = {}
+  if(!req.query.admin){
+    condition.deleted = {$ne:true}
+  }
+  let query = Product.find(condition);
+  let totalProductsQuery=Product.find(condition)
   if (req.query.category) {
     query = query.find({ category: req.query.category });
     totalProductsQuery=totalProductsQuery.find({ category: req.query.category });
@@ -62,7 +65,6 @@ exports.updateProduct = async (req, res) => {
   try {
     const product = await Product.findByIdAndUpdate(id,req.body,{new:true})
     res.status(200).json(product);
-    console.log(res);
   } catch (err) {
     res.status(400).json(err);
   }
